@@ -1,10 +1,16 @@
 #include <stdio.h>
 
-int main(void) {
-    for (int i = 0; i < 10; ++i) {
-        printf("%d\n", i);
+long long nextFib(long long *cache) {
+  const long long newFib = *cache + *(cache + 1);
+  *cache = *(cache + 1);
+  *(cache + 1) = newFib;
+  return newFib;
+}
 
-    }
-    printf("Hello, World!\n");
-    return 0;
+int main(void) {
+  long long cache[] = {1, 1};
+  for (int i = 3; i < 100; ++i) {
+    printf("fib[%d]: %llu\n", i, nextFib(cache));
+  }
+  return 0;
 }
